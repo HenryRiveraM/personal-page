@@ -1,0 +1,25 @@
+{
+  "name": "Henry Rivera — Frontend Developer",
+  "short_name": "Henry Rivera",
+  "description": "Portafolio de Henry Rivera, Frontend Developer y estudiante de Ingeniería de Sistemas.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "assets/favicon/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/favicon/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#11120f",
+  "background_color": "#11120f",
+  "display": "standalone"
+}

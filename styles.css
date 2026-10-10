@@ -180,6 +180,77 @@ a.project-image:hover img { transform: scale(1.018); filter: saturate(1.04); }
   .footer-inner { align-items: flex-start; flex-direction: column; padding-block: 1.5rem; }.footer-inner > span:nth-child(2) { display: block; text-align: left; }
 }
 
+/* A printed ID inside a clear sleeve, suspended from a silver clip. */
+body.about-open { overflow: hidden; }
+.about-dialog {
+  --badge-ink: #30302f;
+  --badge-muted: #696965;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 4.5rem 1rem 2rem;
+  border: 0;
+  background: transparent;
+  color: var(--badge-ink);
+  overflow: auto;
+  overscroll-behavior: contain;
+  color-scheme: light;
+}
+.about-dialog[open] { display: grid; place-items: center; }
+.about-dialog::backdrop { background: rgb(248 247 245 / 78%); backdrop-filter: blur(13px); -webkit-backdrop-filter: blur(13px); }
+[data-theme="dark"] .about-dialog::backdrop { background: rgb(22 22 21 / 72%); }
+.about-close { position: fixed; top: max(1.25rem, env(safe-area-inset-top)); right: max(1.25rem, env(safe-area-inset-right)); width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border: 1px solid #c9c8c4; border-radius: 50%; background: #fbfaf8; color: #454540; cursor: pointer; transition: background .2s, transform .2s; }
+.about-close svg { width: 1.1rem; }
+.about-close:hover { background: #e9e7e2; transform: rotate(90deg); }
+.about-dialog :focus-visible { outline-color: #77766d; }
+.badge-stage { position: relative; width: min(100%, 32rem); padding-top: 8.2rem; margin-block: auto; transform-origin: 50% 0; }
+.about-dialog[open] .badge-stage { animation: badge-arrive .6s cubic-bezier(.2, .7, .2, 1) both; }
+.badge-clip { position: absolute; z-index: 2; width: 7.6rem; height: 16rem; top: 0; left: calc(50% - 3.8rem); filter: drop-shadow(2px 3px 2px #0003); pointer-events: none; }
+.badge-holder { position: relative; padding: 3.2rem .85rem .85rem; border: 1px solid #c0c0bc; border-radius: 1.3rem; background: linear-gradient(125deg, #ffffffa6, #ffffff24 40%, #ffffff91); box-shadow: inset 0 0 0 2px #ffffffa1, inset 0 -3px 6px #ffffffb3, 0 18px 30px -12px #0006, 0 2px 4px #0002; }
+.badge-slot { position: absolute; width: 4rem; height: .6rem; top: .65rem; left: calc(50% - 2rem); border-radius: 2rem; background: #a5a5a1; box-shadow: inset 0 2px 3px #0005, 0 1px 0 #fff; }
+.badge-paper { position: relative; overflow: hidden; border: 1px solid #e3e2dd; border-radius: .5rem; background: #fffefd; box-shadow: 0 1px 3px #0002; }
+.badge-paper::before { content: ""; position: absolute; inset: 2.6rem auto 0 0; width: 31%; background: repeating-linear-gradient(0deg, transparent 0 12px, #e4e4df 12px 13px); opacity: .75; pointer-events: none; }
+.badge-topline { position: relative; display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 1rem .65rem; border-bottom: 1px solid #e5e4e0; color: var(--badge-muted); font: 500 .6rem/1.5 var(--mono); letter-spacing: .17em; text-transform: uppercase; }
+.badge-content { position: relative; display: grid; grid-template-columns: .95fr 1.05fr; align-items: start; gap: 1.1rem; padding: .9rem 1rem 0; }
+.badge-photo { aspect-ratio: 1 / 1.08; border: 1px solid #bdbdb7; border-radius: .8rem; overflow: hidden; background: #ddd; box-shadow: 2px 2px 0 #e1e0db; }
+.badge-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.05); }
+.badge-info { min-width: 0; }
+.badge-info h2 { margin: -.15rem 0 .7rem; font: 700 clamp(1.7rem, 5.5vw, 2.35rem)/.99 "Courier New", monospace; letter-spacing: -.065em; }
+.badge-info h2 span { letter-spacing: -.055em; }
+.badge-info #badge-role { margin: 0 0 .65rem; color: var(--badge-muted); font: .63rem/1.6 var(--mono); letter-spacing: .065em; text-transform: uppercase; }
+.badge-info a { display: flex; align-items: center; min-height: 2.75rem; border-bottom: 1px solid #bdbdb7; font-weight: 600; transition: color .2s, background .2s; }
+.badge-info a:hover { color: #a62b24; background: #f4f1ea; }
+.badge-info .badge-email { display: block; align-content: center; overflow-wrap: anywhere; font-size: .76rem; line-height: 1.5; letter-spacing: -.025em; }
+.badge-whatsapp { gap: .55rem; font-size: .9rem; }
+.badge-whatsapp svg { width: 1.15rem; }
+.badge-whatsapp > span { margin-left: auto; }
+.badge-note { margin: .75rem 0 0; color: var(--badge-muted); font: italic .73rem/1.5 var(--body); }
+.badge-bottom { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.1rem; padding: .9rem 1rem; color: var(--badge-muted); font: .56rem/1.5 var(--mono); letter-spacing: .035em; }
+.badge-bottom > span:first-child { max-width: 15rem; }
+.badge-bottom > span:last-child { color: #656560; font: 1.4rem/1 serif; }
+@keyframes badge-arrive {
+  from { opacity: 0; transform: translateY(-22px) rotate(-4deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+@media (max-width: 480px) {
+  .about-dialog { padding-inline: .75rem; }
+  .badge-stage { padding-top: 6.5rem; }
+  .badge-clip { width: 6rem; height: 12.6rem; left: calc(50% - 3rem); }
+  .badge-holder { padding: 2.6rem .55rem .55rem; border-radius: 1rem; }
+  .badge-content { gap: .7rem; padding: .8rem .7rem 0; grid-template-columns: .9fr 1.1fr; }
+  .badge-topline { padding-inline: .7rem; font-size: .53rem; }
+  .badge-info h2 { font-size: clamp(1.5rem, 6.5vw, 2rem); }
+  .badge-info #badge-role { font-size: .56rem; }
+  .badge-info .badge-email { font-size: .68rem; }
+  .badge-note { font-size: .65rem; }
+  .badge-photo { aspect-ratio: 1 / 1.28; }
+  .badge-bottom { padding-inline: .7rem; font-size: .52rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }

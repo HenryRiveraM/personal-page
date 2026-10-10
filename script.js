@@ -125,3 +125,35 @@ const sectionObserver = new IntersectionObserver((entries) => {
 
 sections.forEach((section) => sectionObserver.observe(section));
 document.querySelector('[data-year]').textContent = new Date().getFullYear();
+
+const aboutDialog = document.querySelector('#about-card');
+const aboutTriggers = document.querySelectorAll('a[href="#sobre-mi"]');
+let aboutOpener;
+
+aboutTriggers.forEach((link) => {
+  link.setAttribute('aria-haspopup', 'dialog');
+  link.setAttribute('aria-controls', 'about-card');
+  link.addEventListener('click', (event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    aboutOpener = link.closest('.mobile-nav') ? menuButton : link;
+    closeMenu(false);
+    aboutDialog.showModal();
+    document.body.classList.add('about-open');
+  });
+});
+
+document.querySelector('[data-about-close]').addEventListener('click', () => aboutDialog.close());
+// Only dismiss when both ends of the gesture are outside the credential.
+let aboutBackdropPressed = false;
+aboutDialog.addEventListener('pointerdown', (event) => {
+  aboutBackdropPressed = event.target === aboutDialog;
+});
+aboutDialog.addEventListener('click', (event) => {
+  if (aboutBackdropPressed && event.target === aboutDialog) aboutDialog.close();
+  aboutBackdropPressed = false;
+});
+aboutDialog.addEventListener('close', () => {
+  document.body.classList.remove('about-open');
+  aboutOpener?.focus({ preventScroll: true });
+});
